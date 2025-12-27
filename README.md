@@ -11,4 +11,4 @@
 - https://github.com/ImMALWARE/bash-warp-generator - создание конфигов WARP для AmneziaVPN/AmneziaWG на удалённом сервере (не совсем user-friendly решение по сравнению с llimonix)
 - https://www.torproject.org - в представлении не нуждается, к сожалению заблокировано в России, поэтому для доступа нужно использовать в комбинации с zapret (или другой программой для обхода DPI, в том числе и VPN), в самом браузере tor нужны будут мосты (https://t.me/GetBridgesBot - тг бот, https://bridges.torproject.org/options - сайт, webtunnel мосты более предпочтительны нежели obfs4), есть сторонние варианты использования tor без браузера, но про них я мало знаю
 - https://protontestguide.github.io/ProtonVPN-Converter - конвертер конфигов protonvpn из wireguard в amneziawg (требуется иметь аккаунт в proton и создать бесплатный конфиг на сайте по протоколу wireguard, на сам сайт proton можно зайти только с VPN или zapret, protonvpn.com - сайт протон)
-- https://generator-warp-config.vercel.app - аналог warp.llimonix.dev
+- https://generator-warp-config.vercel.app - аналог https://warp.llimonix.dev
