@@ -1,1 +1,3 @@
 - throne, v2rayn, v2rayng
+- white lists on my phone in "what I use" section
+- need more blockcheck tests for zapret2

@@ -1,3 +1,4 @@
+# https tls 1.3 ipv4
 nfqws2 --payload=tls_client_hello --lua-desync=multidisorder:pos=1
 nfqws2 --payload=tls_client_hello --lua-desync=multidisorder:pos=2
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=1:badsum
@@ -1114,3 +1115,8 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-660
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakedsplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
+
+# http/3 ipv4 + ipv6
+nfqws2 --payload=quic_initial --lua-desync=fake:blob=fake_default_quic:repeats=10
+nfqws2 --payload=quic_initial --lua-desync=send:ipfrag:ipfrag_pos_udp=64 --lua-desync=drop
+nfqws2 --payload=quic_initial --lua-desync=fake:blob=fake_default_quic:repeats=1 --lua-desync=send:ipfrag:ipfrag_pos_udp=8 --lua-desync=drop
