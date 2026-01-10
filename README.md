@@ -1,10 +1,10 @@
 ### полезные инструменты для обхода блокировок в России
 
-- **[igareck/vpn-configs-for-russia](https://github.com/igareck/vpn-configs-for-russia)** - рабочие конфиги **VLESS**, используйте такие клиенты, как **v2rayng**, **v2rayn** или **v2raya**
+- **[igareck/vpn-configs-for-russia](https://github.com/igareck/vpn-configs-for-russia)** - рабочие конфиги **VLESS**, используйте такие клиенты, как ***[v2rayNG](https://github.com/2dust/v2rayNG)**, **[v2rayN](https://github.com/2dust/v2rayN)** или **[v2rayA](https://github.com/v2rayA/v2rayA)**
 
 - **[AmneziaVPN](https://github.com/amnezia-vpn/amnezia-client)** - клиент **AmneziaVPN**, можно использовать свои конфиги с разными протоколами
 
-- **[Epodonios/v2ray-configs](https://github.com/Epodonios/v2ray-configs)** - конфиги **VLESS**, далеко не все из них работают, используйте **v2rayng**, **v2rayn** или **v2raya**
+- **[Epodonios/v2ray-configs](https://github.com/Epodonios/v2ray-configs)** - конфиги **VLESS**, далеко не все из них работают, используйте **[v2rayNG](https://github.com/2dust/v2rayNG)**, **[v2rayN](https://github.com/2dust/v2rayN)** или **[v2rayA](https://github.com/v2rayA/v2rayA)**
 
 - **[dns.malw.link](https://github.com/ImMALWARE/dns.malw.link)** - обход блокировок со стороны владельцев сайтов с помощью SNI прокси сервера от создателя проекта (gemini или spotify к примеру, **[сайт](https://info.dns.malw.link)**)
 
