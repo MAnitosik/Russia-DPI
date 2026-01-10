@@ -1,10 +1,10 @@
 ### полезные инструменты для обхода блокировок в России
 
-- **[igareck/vpn-configs-for-russia](https://github.com/igareck/vpn-configs-for-russia)** - рабочие конфиги **VLESS**, используйте такие клиенты, как **v2rayng**, **v2rayn** или **throne**
+- **[igareck/vpn-configs-for-russia](https://github.com/igareck/vpn-configs-for-russia)** - рабочие конфиги **VLESS**, используйте такие клиенты, как **v2rayng**, **v2rayn** или **v2raya**
 
 - **[AmneziaVPN](https://github.com/amnezia-vpn/amnezia-client)** - клиент **AmneziaVPN**, можно использовать свои конфиги с разными протоколами
 
-- **[Epodonios/v2ray-configs](https://github.com/Epodonios/v2ray-configs)** - конфиги **VLESS**, далеко не все из них работают, используйте **v2rayng**, **v2rayn** или **throne**
+- **[Epodonios/v2ray-configs](https://github.com/Epodonios/v2ray-configs)** - конфиги **VLESS**, далеко не все из них работают, используйте **v2rayng**, **v2rayn** или **v2raya**
 
 - **[dns.malw.link](https://github.com/ImMALWARE/dns.malw.link)** - обход блокировок со стороны владельцев сайтов с помощью SNI прокси сервера от создателя проекта (gemini или spotify к примеру, **[сайт](https://info.dns.malw.link)**)
 
@@ -26,6 +26,12 @@
 
 - **[WARP config generator](https://generator-warp-config.vercel.app)** - не хочу особо расписывать, это просто аналог **[WARP llimonix](https://github.com/nellimonix/warp-config-generator-vercel)**
 
+- **[v2rayA](https://github.com/v2rayA/v2rayA)** - веб интерфейс для **v2ray**, может быть сложен в установке для новичков, сам интерфейс и его настройка довльно простые (доступ к интерфейсу можно получить по адресу "localhost:2017")
+
+- **[v2rayN](https://github.com/2dust/v2rayN)** - самый популярный клиент для **v2ray**, особо нечего сказать
+
+- **[v2rayNG](https://github.com/2dust/v2rayNG)** - **[v2rayN](https://github.com/2dust/v2rayN)** для телефонов по сути, создано одним и тем-же человеком
+
 ### что используя я
 Раньше у меня был провайдер ростелеком, где на удивление всё легко обходилось. Я переехал и сменил провайдера на местного НН, где блокируется сильно жёстче, чем у ростелекома по какой-то причине (хотя казалось бы ростелеком наиболее всего приближён к государству)
 
@@ -37,13 +43,15 @@
 
 До недавнего времени использовал этот **[проект](https://github.com/kartavkun/zapret-discord-youtube)**, но даже с ним не всё работало и приходилось комбинировать с **VPN**, на данный момент **[zapret](https://github.com/bol-van/zapret)** сам по себе начал плохо работать у меня, и в целом интернет с ним помирал (даже на сайтах, которые не заблокированы)
 
-В итоге полностью перешёл на **VPN** пока что (ещё тестирую)
+В итоге полностью перешёл на **VPN** на данный момент
 
 Итоговый список выглядит так:
 1. **[AmneziaVPN](https://github.com/amnezia-vpn/amnezia-client)** с конфигами **[WARP llimonix](https://github.com/nellimonix/warp-config-generator-vercel)** на **AmneziaWG 1.5** и **[Proton VPN](https://protonvpn.com)** на **AmneziaWG 1.5** (используя **[конвертер](https://protontestguide.github.io/ProtonVPN-Converter)**)
-2. **Throne** с конфигами **[igareck/vpn-configs-for-russia](https://github.com/igareck/vpn-configs-for-russia)** и **[Epodonios/v2ray-configs](https://github.com/Epodonios/v2ray-configs)** (в основном сижу на **VPN** ещё, тестирую в разных условиях это комбо пока что)
+2. **[v2rayA](https://github.com/v2rayA/v2rayA)** с конфигами **[igareck/vpn-configs-for-russia](https://github.com/igareck/vpn-configs-for-russia)** и **[Epodonios/v2ray-configs](https://github.com/Epodonios/v2ray-configs)** (в основном сижу на **VPN** ещё, время от времени проверяю работу конфигов **VLESS**)
 3. **[zapret2](https://github.com/bol-van/zapret2)** со стратегиями из **[blockcheck2](https://github.com/bol-van/zapret2/blob/master/docs/manual.md#blockcheck2)** (ещё тестирую, пока что нечего сказать)
 4. **[Tor](https://www.torproject.org)** (держу у себя на всякий случай, не бывает лишним)
+
+На телефоне использую **[v2rayNG](https://github.com/2dust/v2rayNG)** с теми же конфигами, что и в **[v2rayA](https://github.com/v2rayA/v2rayA)**
 
 ### советы для безопасности/анонимности
 
