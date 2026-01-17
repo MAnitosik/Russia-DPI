@@ -1,4 +1,7 @@
-# https tls 1.3 ipv4
+# http + tls 1.3
+nfqws2 --in-range=-s1 --lua-desync=oob:urp=0
+nfqws2 --in-range=-s1 --lua-desync=oob:urp=2
+nfqws2 --in-range=-s1 --lua-desync=oob:urp=midsld
 nfqws2 --payload=tls_client_hello --lua-desync=multidisorder:pos=1
 nfqws2 --payload=tls_client_hello --lua-desync=multidisorder:pos=2
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=1:badsum
@@ -16,6 +19,7 @@ nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=2:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=1,midsld:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=1:tcp_seq=-3000
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=2:tcp_seq=-3000
+nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=sniext+1:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:badsum:repeats=1
 nfqws2 --lua-desync=syndata --payload=tls_client_hello --lua-desync=multisplit
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:tcp_md5:repeats=1
@@ -24,8 +28,10 @@ nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=1:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=2:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:ip_ttl=9:repeats=1
 nfqws2 --lua-desync=syndata --payload=tls_client_hello --lua-desync=multidisorder
+nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=host+1:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=midsld:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=tcpseg:pos=0,1:ip_id=rnd:repeats=1
+nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=host+1:tcp_seq=-3000
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=midsld:tcp_seq=-3000
 nfqws2 --payload=tls_client_hello --lua-desync=multidisorder:pos=2,midsld:seqovl=1
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=1,midsld:tcp_ts=-1000
@@ -33,14 +39,15 @@ nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=sniext+1:tcp_ts=-1
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=sniext+4:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:tcp_ts=-1000:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=1,midsld:tcp_seq=-3000
+nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=host+1:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=midsld:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=sniext+1:tcp_seq=-3000
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=sniext+4:tcp_seq=-3000
+nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake1:badsum:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake2:badsum:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=1,midsld:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=sniext+1:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=sniext+4:tcp_seq=1000000
-nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake1:tcp_md5:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake2:tcp_md5:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=tcpseg:pos=0,midsld:ip_id=rnd:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake1:ip_ttl=9:repeats=1
@@ -58,6 +65,7 @@ nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake2:tcp_ts=-100
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:badsum:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:midhost=midsld:badsum:repeats=1
 nfqws2 --lua-desync=syndata:blob=0x1603 --payload=tls_client_hello --lua-desync=multidisorder
+nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=host+1:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=midsld:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:tcp_md5:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:midhost=midsld:tcp_md5:repeats=1
@@ -76,34 +84,32 @@ nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofa
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake1:midhost=midsld:badsum:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake2:midhost=midsld:badsum:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake2:tcp_md5:repeats=1
-nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake1:ip_ttl=9:repeats=1
+nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake1:midhost=midsld:tcp_md5:repeats=1
+nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake2:midhost=midsld:tcp_md5:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake2:ip_ttl=9:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake1:midhost=midsld:ip_ttl=9:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake2:midhost=midsld:ip_ttl=9:repeats=1
-nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake1:tcp_ack=-66000:tcp_ts_up:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake2:tcp_ack=-66000:tcp_ts_up:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake1:tcp_ts=-1000:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake2:tcp_ts=-1000:repeats=1
-nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake1:midhost=midsld:tcp_ts=-1000:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake2:midhost=midsld:tcp_ts=-1000:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:midhost=midsld:badsum:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:midhost=midsld:tcp_md5:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:midhost=midsld:ip_ttl=9:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:badsum:pos=2:nodrop:repeats=1
+nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:tcp_ack=-66000:tcp_ts_up:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:midhost=midsld:tcp_ack=-66000:tcp_ts_up:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:midhost=midsld:tcp_ts=-1000:repeats=1
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:badsum:repeats=1 --lua-desync=multisplit:pos=1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:badsum:repeats=1 --lua-desync=multisplit:pos=2
+nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake1:midhost=midsld:badsum:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake2:midhost=midsld:badsum:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_ts=-1000:pos=2:nodrop:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:midhost=midsld:tcp_seq=1000000:repeats=1
-nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake1:midhost=midsld:tcp_md5:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake2:midhost=midsld:tcp_md5:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake1:midhost=midsld:ip_ttl=9:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake2:midhost=midsld:ip_ttl=9:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=multidisorder:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:tls_mod=rnd,dupsid,padencap:repeats=1
-nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake1:tcp_ack=-66000:tcp_ts_up:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake2:tcp_ack=-66000:tcp_ts_up:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake1:midhost=midsld:tcp_ack=-66000:tcp_ts_up:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake2:midhost=midsld:tcp_ack=-66000:tcp_ts_up:repeats=1
@@ -154,6 +160,7 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:badsum:repea
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:repeats=1 --lua-desync=multisplit:pos=1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:repeats=1 --lua-desync=multisplit:pos=2
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=multisplit:pos=1,midsld
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:repeats=1 --lua-desync=fakeddisorder:pos=1:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:repeats=1 --lua-desync=fakeddisorder:pos=2:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:badsum:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:badsum
@@ -175,6 +182,7 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:repeats=1 --lua-desync=multisplit:pos=1,midsld
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:repeats=1 --lua-desync=multisplit:pos=sniext+1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:repeats=1 --lua-desync=multisplit:pos=sniext+4
+nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake1:midhost=midsld:tcp_ack=-66000:tcp_ts_up:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake2:midhost=midsld:tcp_ack=-66000:tcp_ts_up:repeats=1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:repeats=1 --lua-desync=fakedsplit:pos=1,midsld:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:repeats=1 --lua-desync=fakedsplit:pos=sniext+1:badsum
@@ -184,10 +192,8 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_ttl
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:repeats=1 --lua-desync=multisplit:pos=host+1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:repeats=1 --lua-desync=multisplit:pos=midsld
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_ttl=1:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:ip_ttl=1
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_ttl=1:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:ip_ttl=1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_ttl=1:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:ip_ttl=1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=multisplit:pos=1,midsld,1220
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=-3000:repeats=1 --lua-desync=fakedsplit:pos=1:tcp_seq=-3000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=-3000:repeats=1 --lua-desync=fakedsplit:pos=2:tcp_seq=-3000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:repeats=1 --lua-desync=fakeddisorder:pos=host+1:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:repeats=1 --lua-desync=fakeddisorder:pos=midsld:badsum
@@ -203,7 +209,6 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=-3000:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_seq=-3000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=-3000:repeats=1 --lua-desync=fakeddisorder:pos=2:tcp_seq=-3000
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ts=-1000:repeats=1 --lua-desync=fakedsplit:pos=host+1:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ts=-1000:repeats=1 --lua-desync=fakedsplit:pos=midsld:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:repeats=1 --lua-desync=multisplit:pos=1,midsld,1220
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=multisplit:pos=1,midsld
@@ -215,6 +220,7 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:repeats=1 --lua-desync=fakedsplit:pos=2:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=1:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
+nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=2:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:badsum:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=1
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:badsum:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=2
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=-3000:repeats=1 --lua-desync=fakedsplit:pos=host+1:tcp_seq=-3000
@@ -241,8 +247,10 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ts=-1000:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ts=-1000:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=multisplit:pos=1,midsld,1220
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fakedsplit:pos=host+1:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fakedsplit:pos=midsld:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:repeats=1 --lua-desync=fakedsplit:pos=host+1:tcp_ts=-1000
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:repeats=1 --lua-desync=fakedsplit:pos=midsld:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=host+1:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=midsld:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake1:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
@@ -260,15 +268,17 @@ nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_ts=-1000:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=2
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_flags_set=SYN:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_flags_set=SYN:repeats=1 --lua-desync=fakeddisorder:pos=2:tcp_flags_set=SYN
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fakedsplit:pos=1,midsld:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fakedsplit:pos=sniext+1:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fakedsplit:pos=sniext+4:tcp_seq=1000000
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:repeats=1 --lua-desync=fakedsplit:pos=1,midsld:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:repeats=1 --lua-desync=fakedsplit:pos=sniext+1:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:repeats=1 --lua-desync=fakedsplit:pos=sniext+4:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=1,midsld:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=sniext+1:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
+nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=sniext+4:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:badsum:pos=2:nodrop:repeats=1 --lua-desync=fakedsplit:pos=1:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:badsum:pos=2:nodrop:repeats=1 --lua-desync=fakedsplit:pos=2:badsum
+nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:badsum:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=1,midsld
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:badsum:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=sniext+1
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:badsum:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=sniext+4
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=-3000:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=1
@@ -287,11 +297,12 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-4,3-20:repeats=1 --lua-desync=fakeddisorder:pos=2:ip_autottl=-4,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-5,3-20:repeats=1 --lua-desync=fakeddisorder:pos=1:ip_autottl=-5,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-5,3-20:repeats=1 --lua-desync=fakeddisorder:pos=2:ip_autottl=-5,3-20
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=2
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_seq=1000000
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:repeats=1 --lua-desync=fakeddisorder:pos=2:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=1000000:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=1
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=1000000:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=2
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
@@ -317,13 +328,12 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_flags_se
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:midhost=midsld:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:badsum:pos=2:nodrop:repeats=1 --lua-desync=fakedsplit:pos=host+1:badsum
-nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:badsum:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=1,midsld,1220
+nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:badsum:pos=2:nodrop:repeats=1 --lua-desync=fakedsplit:pos=midsld:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:repeats=1 --lua-desync=fakeddisorder:pos=2:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:repeats=1 --lua-desync=fakedsplit:pos=1,midsld:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:repeats=1 --lua-desync=fakedsplit:pos=sniext+1:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:repeats=1 --lua-desync=fakedsplit:pos=sniext+4:tcp_seq=1000000
-nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=1,midsld:ip_ttl=9:repeats=1 --payload=empty --out-range=s1<d1 --lua-desync=pktmod:ip_ttl=1
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=sniext+1:ip_ttl=9:repeats=1 --payload=empty --out-range=s1<d1 --lua-desync=pktmod:ip_ttl=1
 nfqws2 --payload=tls_client_hello --lua-desync=fakedsplit:pos=sniext+4:ip_ttl=9:repeats=1 --payload=empty --out-range=s1<d1 --lua-desync=pktmod:ip_ttl=1
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_ts=-1000:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=1,midsld
@@ -335,7 +345,6 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-2,3-20:repeats=1 --lua-desync=fakeddisorder:pos=midsld:ip_autottl=-2,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-3,3-20:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_autottl=-3,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-3,3-20:repeats=1 --lua-desync=fakeddisorder:pos=midsld:ip_autottl=-3,3-20
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-4,3-20:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_autottl=-4,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-4,3-20:repeats=1 --lua-desync=fakeddisorder:pos=midsld:ip_autottl=-4,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-5,3-20:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_autottl=-5,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-5,3-20:repeats=1 --lua-desync=fakeddisorder:pos=midsld:ip_autottl=-5,3-20
@@ -359,7 +368,6 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_aut
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-3,3-20:repeats=1 --lua-desync=fakeddisorder:pos=1:ip_autottl=-3,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-3,3-20:repeats=1 --lua-desync=fakeddisorder:pos=2:ip_autottl=-3,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-4,3-20:repeats=1 --lua-desync=fakeddisorder:pos=1:ip_autottl=-4,3-20
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-4,3-20:repeats=1 --lua-desync=fakeddisorder:pos=2:ip_autottl=-4,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-5,3-20:repeats=1 --lua-desync=fakeddisorder:pos=1:ip_autottl=-5,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-5,3-20:repeats=1 --lua-desync=fakeddisorder:pos=2:ip_autottl=-5,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=host+1
@@ -423,6 +431,7 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=2:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:ip_ttl=1:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_ttl=1
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:ip_ttl=1:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=midsld:ip_ttl=1
+nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=-3000:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=1,midsld,1220
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_ts=-1000:pos=2:nodrop:repeats=1 --lua-desync=fakedsplit:pos=1:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_ts=-1000:pos=2:nodrop:repeats=1 --lua-desync=fakedsplit:pos=2:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-1,3-20:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_autottl=-1,3-20
@@ -438,9 +447,11 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_aut
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_ttl=9:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakedsplit:pos=1:ip_ttl=9
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_ttl=9:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakedsplit:pos=2:ip_ttl=9
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:tcp_flags_set=SYN
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=host+1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=midsld
+nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake1:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:disorder_after:nofake2:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake1:midhost=midsld:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=hostfakesplit:nofake2:midhost=midsld:tcp_md5:repeats=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
@@ -491,7 +502,6 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_ttl
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_ttl=9:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=1,midsld,1220
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakedsplit:pos=host+1:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakedsplit:pos=midsld:tcp_md5
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=midsld
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=host+1:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=midsld:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_unset=ACK:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:tcp_flags_unset=ACK
@@ -500,6 +510,7 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_fl
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=-3000:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_seq=-3000
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=-3000:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=2:tcp_seq=-3000
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_ts=-1000:pos=2:nodrop:repeats=1 --lua-desync=fakedsplit:pos=host+1:tcp_ts=-1000
+nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_ts=-1000:pos=2:nodrop:repeats=1 --lua-desync=fakedsplit:pos=midsld:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fakedsplit:pos=1,midsld:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fakedsplit:pos=sniext+1:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fakedsplit:pos=sniext+4:tcp_ack=-66000:tcp_ts_up
@@ -564,10 +575,10 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_se
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=1000000:pos=2:nodrop:repeats=1 --lua-desync=fakedsplit:pos=host+1:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=1000000:pos=2:nodrop:repeats=1 --lua-desync=fakedsplit:pos=midsld:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_ts=-1000
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=2:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=-3000:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:tcp_seq=-3000
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=-3000:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:tcp_seq=-3000
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=-3000:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:tcp_seq=-3000
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ts=-1000:repeats=1 --lua-desync=multisplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:repeats=1 --lua-desync=multisplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=host+1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=midsld
@@ -583,6 +594,7 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakedsplit:pos=midsld:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=1000000:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=host+1:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=1000000:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=midsld:tcp_seq=1000000
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=multisplit:pos=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=multisplit:pos=2 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=1,midsld
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=sniext+1
@@ -597,7 +609,6 @@ nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:ip_autottl=-3,3-20:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=2:ip_autottl=-3,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:ip_autottl=-4,3-20:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=1:ip_autottl=-4,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:ip_autottl=-4,3-20:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=2:ip_autottl=-4,3-20
-nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:ip_autottl=-5,3-20:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=1:ip_autottl=-5,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:ip_autottl=-5,3-20:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=2:ip_autottl=-5,3-20
 nfqws2 --lua-init=fake_default_tls=tls_mod(fake_default_tls,'rnd') --payload=tls_client_hello --lua-desync=multidisorder:pos=2,midsld:seqovl=1:seqovl_pattern=fake_default_tls
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=multisplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1
@@ -638,6 +649,7 @@ nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:ip_autottl=-4,3-20:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_autottl=-4,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:ip_autottl=-4,3-20:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=midsld:ip_autottl=-4,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:ip_autottl=-5,3-20:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_autottl=-5,3-20
+nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:ip_autottl=-5,3-20:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=midsld:ip_autottl=-5,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_flags_set=SYN:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_flags_set=SYN:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_flags_set=SYN:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:tcp_flags_set=SYN
@@ -647,7 +659,6 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_ttl=1:rep
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:repeats=1 --lua-desync=multisplit:pos=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:repeats=1 --lua-desync=multisplit:pos=2 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=multisplit:pos=1,midsld --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=2:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:repeats=1 --lua-desync=multisplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakedsplit:pos=1,midsld:tcp_seq=1000000
@@ -687,11 +698,9 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_aut
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-5,3-20:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=1:ip_autottl=-5,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-5,3-20:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=2:ip_autottl=-5,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_flags_unset=ACK:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:tcp_flags_unset=ACK
-nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_flags_unset=ACK:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:tcp_flags_unset=ACK
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_flags_unset=ACK:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:tcp_flags_unset=ACK
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=multisplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:tcp_seq=1000000
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fakeddisorder:pos=2:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
@@ -702,7 +711,6 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:repeats=1 --lua-desync=multisplit:pos=midsld --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=multisplit:pos=1,midsld,1220 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_ttl=1:repeats=1 --lua-desync=fakeddisorder:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:ip_ttl=1
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=host+1:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=midsld:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fakedsplit:pos=host+1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fakedsplit:pos=midsld:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
@@ -712,9 +720,9 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:repeats=1 --lua-desync=multisplit:pos=sniext+4 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ts=-1000:repeats=1 --lua-desync=fakeddisorder:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-1,3-20:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_autottl=-1,3-20
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-1,3-20:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=midsld:ip_autottl=-1,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-2,3-20:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_autottl=-2,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-2,3-20:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=midsld:ip_autottl=-2,3-20
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-3,3-20:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_autottl=-3,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-3,3-20:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=midsld:ip_autottl=-3,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-4,3-20:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_autottl=-4,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_autottl=-4,3-20:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=midsld:ip_autottl=-4,3-20
@@ -723,7 +731,6 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_aut
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:tcp_flags_set=SYN
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:repeats=1 --lua-desync=fakedsplit:pos=1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:repeats=1 --lua-desync=fakedsplit:pos=2:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fakedsplit:pos=1,midsld:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fakedsplit:pos=sniext+1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
@@ -759,6 +766,7 @@ nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakedsplit:pos=1:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakedsplit:pos=2:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_unset=ACK:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:tcp_flags_unset=ACK
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_flags_unset=ACK:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:tcp_flags_unset=ACK
@@ -771,7 +779,6 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=2:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:repeats=1 --lua-desync=fakedsplit:pos=1,midsld:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:repeats=1 --lua-desync=fakedsplit:pos=sniext+1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:repeats=1 --lua-desync=fakedsplit:pos=sniext+4:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:badsum:repeats=1 --lua-desync=fake:blob=fake_default_tls:badsum:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=host+1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:badsum:repeats=1 --lua-desync=fake:blob=fake_default_tls:badsum:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=midsld
@@ -845,6 +852,7 @@ nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_md5:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=sniext+4 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_ttl=1:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_ttl=1:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=1:ip_ttl=1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_ttl=1:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_ttl=1:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=2:ip_ttl=1
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:badsum:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakedsplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:badsum
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_md5:pos=2:nodrop:repeats=1 --lua-desync=fakedsplit:pos=1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_md5:pos=2:nodrop:repeats=1 --lua-desync=fakedsplit:pos=2:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:badsum:repeats=1 --lua-desync=fake:blob=fake_default_tls:badsum:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:badsum
@@ -856,9 +864,9 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_fl
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=2 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fakedsplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_ack=-66000:tcp_ts_up
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=2
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakedsplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_md5
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=-3000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_seq=-3000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=host+1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=-3000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_seq=-3000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=midsld
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ts=-1000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=1,midsld
@@ -871,7 +879,6 @@ nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:ip_ttl=9:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakedsplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:ip_ttl=9
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_md5:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=1,midsld,1220 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_ttl=1:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_ttl=1:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_ttl=1
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_ttl=1:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_ttl=1:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=midsld:ip_ttl=1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fakeddisorder:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=-3000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_seq=-3000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=1,midsld
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=-3000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_seq=-3000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=sniext+1
@@ -897,10 +904,10 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=sniext+1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=multisplit:pos=sniext+4 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_md5:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=host+1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
+nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_md5:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=midsld:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=-3000:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_seq=-3000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=1,midsld
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=sniext+1
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=sniext+4
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ts=-1000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakedsplit:pos=1:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ts=-1000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakedsplit:pos=2:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakedsplit:pos=1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
@@ -915,7 +922,6 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=-300
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=-3000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_seq=-3000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakedsplit:pos=2:tcp_seq=-3000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ts=-1000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ts=-1000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=2:tcp_ts=-1000
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=2:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_ts=-1000:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakedsplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_ts=-1000
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_seq=1000000:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_seq=1000000
@@ -944,6 +950,7 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakeddisorder:pos=midsld:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=multisplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakedsplit:pos=1:tcp_seq=1000000
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakedsplit:pos=2:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid,padencap:repeats=1 --lua-desync=fakedsplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_seq=1000000
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:ip_autottl=-1,3-20:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:ip_autottl=-1,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:ip_autottl=-2,3-20:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:ip_autottl=-2,3-20
@@ -1010,7 +1017,6 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=1,midsld,1220
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_flags_set=SYN:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=host+1:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_flags_set=SYN:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=midsld:tcp_flags_set=SYN
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:repeats=1 --lua-desync=fakedsplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_flags_unset=ACK:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_flags_unset=ACK:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_flags_unset=ACK
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_flags_unset=ACK:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_flags_unset=ACK:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=2:tcp_flags_unset=ACK
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_flags_set=SYN:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:tcp_flags_set=SYN
@@ -1018,7 +1024,6 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_flags_se
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_flags_set=SYN:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_flags_set=SYN:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:tcp_flags_set=SYN
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:badsum:repeats=1 --lua-desync=fake:blob=fake_default_tls:badsum:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-1,3-20:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_autottl=-1,3-20:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_autottl=-1,3-20
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-1,3-20:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_autottl=-1,3-20:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=midsld:ip_autottl=-1,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-2,3-20:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_autottl=-2,3-20:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_autottl=-2,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-2,3-20:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_autottl=-2,3-20:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=midsld:ip_autottl=-2,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-3,3-20:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_autottl=-3,3-20:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=host+1:ip_autottl=-3,3-20
@@ -1039,7 +1044,6 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-3,3-20:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_autottl=-3,3-20:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:ip_autottl=-3,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-3,3-20:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_autottl=-3,3-20:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:ip_autottl=-3,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-4,3-20:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_autottl=-4,3-20:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:ip_autottl=-4,3-20
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-4,3-20:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_autottl=-4,3-20:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:ip_autottl=-4,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-4,3-20:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_autottl=-4,3-20:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:ip_autottl=-4,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-5,3-20:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_autottl=-5,3-20:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:ip_autottl=-5,3-20
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_autottl=-5,3-20:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_autottl=-5,3-20:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:ip_autottl=-5,3-20
@@ -1065,7 +1069,7 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=-300
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakedsplit:pos=host+1:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakedsplit:pos=midsld:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:ip_ttl=1:repeats=1 --lua-desync=fake:blob=fake_default_tls:ip_ttl=1:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:ip_ttl=1
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=1,midsld --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
+nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=sniext+1 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=sniext+4 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_md5:pos=2:nodrop:repeats=1 --lua-desync=fakedsplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakedsplit:pos=1,midsld:tcp_ack=-66000:tcp_ts_up
@@ -1077,14 +1081,12 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=host+1:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=midsld:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_seq=1000000:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_seq=1000000:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1
-nfqws2 --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_md5:pos=2:nodrop:repeats=1 --lua-desync=fakeddisorder:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=1,midsld:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=sniext+1:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-66000:tcp_ts_up:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_ack=-66000:tcp_ts_up:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=sniext+4:tcp_ack=-66000:tcp_ts_up
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=2:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid:repeats=1 --lua-desync=multisplit:pos=1,midsld,1220 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
-nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakedsplit:pos=host+1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakedsplit:pos=midsld:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakedsplit:pos=1,midsld:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakedsplit:pos=sniext+1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
@@ -1116,7 +1118,5 @@ nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_ack=-660
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakedsplit:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 nfqws2 --payload=tls_client_hello --lua-desync=fake:blob=0x00000000:tcp_md5:repeats=1 --lua-desync=fake:blob=fake_default_tls:tcp_md5:tls_mod=rnd,dupsid:repeats=1 --lua-desync=fakeddisorder:pos=1,sniext+1,host+1,midsld-2,midsld,midsld+2,endhost-1:tcp_md5 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 
-# http/3 ipv4 + ipv6
+# http/3
 nfqws2 --payload=quic_initial --lua-desync=fake:blob=fake_default_quic:repeats=10
-nfqws2 --payload=quic_initial --lua-desync=send:ipfrag:ipfrag_pos_udp=64 --lua-desync=drop
-nfqws2 --payload=quic_initial --lua-desync=fake:blob=fake_default_quic:repeats=1 --lua-desync=send:ipfrag:ipfrag_pos_udp=8 --lua-desync=drop
