@@ -1,6 +1,6 @@
 ### полезные инструменты для обхода блокировок в России
 
-- **[igareck/vpn-configs-for-russia](https://github.com/igareck/vpn-configs-for-russia)** - рабочие конфиги **VLESS**, используйте такие клиенты, как ***[v2rayNG](https://github.com/2dust/v2rayNG)**, **[v2rayN](https://github.com/2dust/v2rayN)** или **[v2rayA](https://github.com/v2rayA/v2rayA)**
+- **[igareck/vpn-configs-for-russia](https://github.com/igareck/vpn-configs-for-russia)** - рабочие конфиги **VLESS**, используйте такие клиенты, как **[v2rayNG](https://github.com/2dust/v2rayNG)**, **[v2rayN](https://github.com/2dust/v2rayN)** или **[v2rayA](https://github.com/v2rayA/v2rayA)**
 
 - **[AmneziaVPN](https://github.com/amnezia-vpn/amnezia-client)** - клиент **AmneziaVPN**, можно использовать свои конфиги с разными протоколами
 
