@@ -22,7 +22,7 @@
 
 - **[Tor](https://www.torproject.org)** - в представлении не нуждается, к сожалению не работает из коробки в России, поэтому для доступа нужно использовать в комбинации с другими способами обхода блокировок, в самом браузере **[Tor](https://www.torproject.org)** нужны будут мосты (**[тг бот](https://t.me/GetBridgesBot)**, **[сайт](https://bridges.torproject.org/options)**, **webtunnel** мосты более предпочтительны)
 
-- **[ProtonVPN converter](https://protontestguide.github.io/ProtonVPN-Converter)** - конвертер конфигов **[Proton VPN](https://protonvpn.com)** из **wireguard** в **AmneziaWG** для **[AmneziaVPN](https://github.com/amnezia-vpn/amnezia-client)** (требуется иметь аккаунт в **[Proton](https://protonvpn.com)** и создать бесплатный конфиг на сайте по протоколу **wireguard**, на сам сайт **[Proton](https://protonvpn.com)** можно зайти только с помощью утилит для обхода блокировок)
+- **[ProtonVPN converter](https://proton-converter.github.io/proton)** - конвертер конфигов **[Proton VPN](https://protonvpn.com)** из **wireguard** в **AmneziaWG** для **[AmneziaVPN](https://github.com/amnezia-vpn/amnezia-client)** (требуется иметь аккаунт в **[Proton](https://protonvpn.com)** и создать бесплатный конфиг на сайте по протоколу **wireguard**, на сам сайт **[Proton](https://protonvpn.com)** можно зайти только с помощью утилит для обхода блокировок)
 
 - **[WARP config generator](https://generator-warp-config.vercel.app)** - не хочу особо расписывать, это просто аналог **[WARP llimonix](https://github.com/nellimonix/warp-config-generator-vercel)**
 
@@ -46,7 +46,7 @@
 В итоге полностью перешёл на **VPN** на данный момент
 
 Итоговый список выглядит так:
-1. **[AmneziaVPN](https://github.com/amnezia-vpn/amnezia-client)** с конфигами **[WARP llimonix](https://github.com/nellimonix/warp-config-generator-vercel)** на **AmneziaWG 1.5** и **[Proton VPN](https://protonvpn.com)** на **AmneziaWG 1.5** (используя **[конвертер](https://protontestguide.github.io/ProtonVPN-Converter)**)
+1. **[AmneziaVPN](https://github.com/amnezia-vpn/amnezia-client)** с конфигами **[WARP llimonix](https://github.com/nellimonix/warp-config-generator-vercel)** на **AmneziaWG 1.5** и **[Proton VPN](https://protonvpn.com)** на **AmneziaWG 1.5** (используя **[конвертер](https://proton-converter.github.io/proton/)**)
 2. **[v2rayA](https://github.com/v2rayA/v2rayA)** с конфигами **[igareck/vpn-configs-for-russia](https://github.com/igareck/vpn-configs-for-russia)** и **[Epodonios/v2ray-configs](https://github.com/Epodonios/v2ray-configs)** (в основном сижу на **VPN** ещё, время от времени проверяю работу конфигов **VLESS**)
 3. **[zapret2](https://github.com/bol-van/zapret2)** со стратегиями из **[blockcheck2](https://github.com/bol-van/zapret2/blob/master/docs/manual.md#blockcheck2)** (ещё тестирую, пока что нечего сказать)
 4. **[Tor](https://www.torproject.org)** (держу у себя на всякий случай, не бывает лишним)
