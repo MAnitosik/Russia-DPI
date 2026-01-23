@@ -12,7 +12,7 @@
 
 - **[zapret2](https://github.com/bol-van/zapret2)** - новая версия **[zapret](https://github.com/bol-van/zapret)**, где используется **Lua** для создания стратегий обходов (в теории может быть ещё сложнее, чем классический **[zapret](https://github.com/bol-van/zapret)**, но окупается своей гибкостью с помощью **Lua**)
 
-- **[zapret-discord-youtube](https://github.com/Flowseal/zapret-discord-youtube)** - простой обход DPI с готовыми стратегиями от **Flowseal** для Windows (создан на основе **[zapret](https://github.com/bol-van/zapret)** от **bol-van**, включает в себя файл hosts для Discord с )
+- **[zapret-discord-youtube](https://github.com/Flowseal/zapret-discord-youtube)** - простой обход DPI с готовыми стратегиями от **Flowseal** для Windows (создан на основе **[zapret](https://github.com/bol-van/zapret)** от **bol-van**, включает в себя файл hosts для Discord с Финскими ip для подключения)
 
 - **[kartavkun/zapret-discord-youtube](https://github.com/kartavkun/zapret-discord-youtube)** - простая установка **[zapret](https://github.com/bol-van/zapret)** для линукса со стратегиями обхода от **Flowseal** (**Flowseal** лично **не** причастен к этому проекту)
 
