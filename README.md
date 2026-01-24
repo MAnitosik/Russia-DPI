@@ -6,7 +6,7 @@
 
 - **[Epodonios/v2ray-configs](https://github.com/Epodonios/v2ray-configs)** - конфиги **vless**, далеко не все из них работают, используйте **[v2rayNG](https://github.com/2dust/v2rayNG)**, **[v2rayN](https://github.com/2dust/v2rayN)** или **[v2rayA](https://github.com/v2rayA/v2rayA)**
 
-- **[dns.malw.link](https://github.com/ImMALWARE/dns.malw.link)** - обход блокировок со стороны владельцев сайтов с помощью SNI прокси сервера от создателя проекта (gemini или spotify к примеру, **[сайт](https://info.dns.malw.link)**)
+- **[dns.malw.link](https://github.com/ImMALWARE/dns.malw.link)** - обход блокировок со стороны владельцев сайтов с помощью SNI прокси сервера от создателя проекта (Google Gemini или Spotify к примеру, **[сайт](https://info.dns.malw.link)**)
 
 - **[zapret](https://github.com/bol-van/zapret)** - обход DPI, сложна в настройке для новичков, нужно читать документацию, более не получает новых возможностей в пользу **[zapret2](https://github.com/bol-van/zapret2)** (**[zapret](https://github.com/bol-van/zapret)** от **bol-van** это не то же самое, что и **[zapret-discord-youtube](https://github.com/Flowseal/zapret-discord-youtube)** от **Flowseal**)
 
@@ -14,7 +14,7 @@
 
 - **[zapret-discord-youtube](https://github.com/Flowseal/zapret-discord-youtube)** - простой обход DPI с готовыми стратегиями от **Flowseal** для Windows (создан на основе **[zapret](https://github.com/bol-van/zapret)** от **bol-van**, включает в себя файл hosts для Discord с Финскими ip для подключения)
 
-- **[kartavkun/zapret-discord-youtube](https://github.com/kartavkun/zapret-discord-youtube)** - простая установка **[zapret](https://github.com/bol-van/zapret)** для линукса со стратегиями обхода от **Flowseal** (**Flowseal** лично **не** причастен к этому проекту)
+- **[kartavkun/zapret-discord-youtube](https://github.com/kartavkun/zapret-discord-youtube)** - простая установка **[zapret](https://github.com/bol-van/zapret)** для Linux со стратегиями обхода от **Flowseal** (**Flowseal** лично **не** причастен к этому проекту)
 
 - **[WARP llimonix](https://github.com/nellimonix/warp-config-generator-vercel)** - генерация конфигов **WARP** от cloudflare на протоколе **AmneziaWG**, конфиги подходят только для **[AmneziaVPN](https://github.com/amnezia-vpn/amnezia-client)** (**[сайт](https://warp.llimonix.dev)**, **[тг бот](https://t.me/warp_generator_bot)**)
 
@@ -36,11 +36,11 @@
 
 Раньше у меня был провайдер Ростелеком, где на удивление всё легко обходилось. Я переехал и сменил провайдера на местного НН, где блокируется сильно жёстче, чем у Ростелекома по какой то причине (хотя казалось бы Ростелеком самый популярный поставщик интернета в России)
 
-Теперь перейду к нынешнему времени:
+Теперь перейду к нынешнему времени
 
-Моя ОС - arch linux (btw, да, знаю, очень смешно)
+Моя ОС - Arch Linux (btw, да, знаю, очень смешно)
 
-В качестве DNS резолвера использую cloudflare с **DoT** и **DNSSEC** (на удивление cloudflare +- работает без перебоев на моём провайдере)
+В качестве DNS резолвера использую Cloudflare с **DoT** и **DNSSEC** (на удивление Cloudflare +- работает без перебоев на моём провайдере)
 
 До недавнего времени использовал этот **[проект](https://github.com/kartavkun/zapret-discord-youtube)**, но даже с ним не всё работало и приходилось комбинировать с **VPN**, на данный момент это мне уже не помогает, а собственные стратегии из **[blockcheck2](https://github.com/bol-van/zapret2/blob/master/docs/manual.md#blockcheck2)** и **[blockcheck](https://github.com/bol-van/zapret/blob/master/docs/quick_start.md#настройка)** для **[zapret2](https://github.com/bol-van/zapret2)** и **[zapret](https://github.com/bol-van/zapret)** соответственно помогают лишь частично
 
@@ -58,9 +58,9 @@
 
 - используйте **DoT/DoH** (**DNS over HTTPS** или **DNS over TLS**) на уровне системы или хотя бы браузера, это позволит избежать утечек DNS, в качестве резолвера советую использовать cloudflare (**[больше информации](https://developers.cloudflare.com/1.1.1.1/encryption)**)
 
-- **не** используйте DNS резолвера, который выдаётся вашим провайдером по умолчанию, поменяйте его на проверенного по типу cloudflare, quad9 и т.д.
+- **не** используйте DNS резолвера, который выдаётся вашим провайдером по умолчанию, поменяйте его на проверенного по типу Cloudflare, Quad9 и т.д.
 
-- **Для линукса:** к сожалению я не знаю как на Windows можно управлять/включить **DNSSEC**, но на линуксе советую использовать **DNSSEC** для лучшей безопасности (**[archlinux wiki](https://wiki.archlinux.org/title/Systemd-resolved#DNSSEC)** - включение **DNSSEC** в линуксе на примере systemd-resolved, проверьте поддерживает ли ваш резолвер **DNSSEC**)
+- **для Linux:** к сожалению я не знаю как на Windows можно управлять/включить **DNSSEC**, но на Linux советую использовать **DNSSEC** для лучшей безопасности (**[Arch Linux Wiki](https://wiki.archlinux.org/title/Systemd-resolved#DNSSEC)** - включение **DNSSEC** в Linux на примере systemd-resolved, проверьте поддерживает ли ваш резолвер **DNSSEC**)
 
 - используйте **всегда** только **HTTPS** в браузерах
 
@@ -84,4 +84,4 @@
 
 - **[DNSCrypt-proxy](https://github.com/DNSCrypt/dnscrypt-proxy)** - DNS **прокси**, который поддерживает разные безопасные DNS протоколы, может быть сложен для новичков
 
-- **[uBlock Origin](https://github.com/gorhill/uBlock)** - универсальное расширение для браузеров, которое позволяет эффективно блокировать различные элементы (рекламу и трекеры к примеру, для Chromium/Blink браузеров возможно придётся скачать lite версию uBlock Origin - **[больше информации](https://github.com/uBlockOrigin/uBlock-issues/wiki/About-Google-Chrome's-%22This-extension-may-soon-no-longer-be-supported%22)**)
+- **[uBlock Origin](https://github.com/gorhill/uBlock)** - универсальное расширение для браузеров, которое позволяет эффективно блокировать различные элементы (рекламу и трекеры к примеру, для Chromium/Blink браузеров возможно придётся скачать **lite** версию **uBlock Origin** - **[больше информации](https://github.com/uBlockOrigin/uBlock-issues/wiki/About-Google-Chrome's-%22This-extension-may-soon-no-longer-be-supported%22)**)
